@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24180e">
+<title>AlphaSide — Minecraft 1.2.6</title>
+
+<style>
+@font-face {
+    font-family: 'Mojangles';
+    src: url('https://raw.githubusercontent.com/MerciGG/Font-Repository/refs/heads/main/Mojangles.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --cream: #f5f0df;
+    --gold: #e5c66a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--cream);
+    font-family: 'Mojangles', monospace;
+    background: #302318 url('https://i.pinimg.com/564x/2a/b1/c3/2ab1c37cfdff720c6de2ddb07328f145.jpg') center top / 320px auto fixed;
+    image-rendering: pixelated;
+}
+
+body:before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(15,10,5,.58);
+    z-index: -1;
+}
+
+.wrap {
+    width: min(900px, calc(100% - 28px));
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 9px;
+    padding: 8px 10px;
+    background: #51402d;
+    border: 2px solid #897454;
+    box-shadow: inset 2px 2px #756044, inset -2px -2px #30251b;
+}
+
+nav a:hover {
+    background: #766044;
+}
+
+.hero {
+    text-align: center;
+    padding: 42px 0 28px;
+}
+
+.logo {
+    width: min(540px, 94%);
+    height: auto;
+    filter: drop-shadow(4px 5px 0 #21170f);
+    image-rendering: auto;
+}
+
+.version {
+    font-size: 10px;
+    color: #fff;
+    text-shadow: 2px 2px #222;
+    margin: 14px 0 24px;
+}
+
+.panel {
+    background: rgba(35,29,22,.94);
+    border: 3px solid #8c7654;
+    box-shadow: inset 3px 3px rgba(255,255,255,.12), inset -3px -3px rgba(0,0,0,.35), 0 8px 24px #0008;
+    padding: 22px;
+    margin: 18px auto;
+}
+
+h1, h2, p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 15px;
+    line-height: 1.8;
+    text-shadow: 2px 2px #000;
+}
+
+h2 {
+    font-size: 12px;
+    color: var(--gold);
+    line-height: 1.8;
+}
+
+p, .small {
+    font-family: Arial, sans-serif;
+    line-height: 1.65;
+    color: #e0d7c5;
+    font-size: 15px;
+}
+
+.actions {
+    display: grid;
+    gap: 12px;
+    max-width: 430px;
+    margin: 0 auto;
+}
+
+/* Botões: somente a textura enviada, sem bordas */
+.mcbtn {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: #777 url('https://raw.githubusercontent.com/YellowblackOfficial/alphaserver/refs/heads/main/136%20Sem%20T%C3%ADtulo_20261115170256.png') center / 100% 100% no-repeat;
+    color: white;
+    text-shadow: 2px 2px #333;
+    font: 10px 'Mojangles', monospace;
+    padding: 15px 12px;
+    cursor: pointer;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.mcbtn:hover {
+    filter: brightness(1.15);
+}
+
+.mcbtn:active {
+    filter: brightness(.9);
+    transform: translateY(1px);
+}
+
+.field {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+input {
+    flex: 1;
+    min-width: 180px;
+    background: #15120e;
+    color: #fff;
+    border: 2px solid #9d8969;
+    padding: 12px;
+    font: 12px Arial, sans-serif;
+    outline: none;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.info {
+    background: #17130f;
+    border: 2px solid #65543d;
+    padding: 14px;
+    text-align: center;
+}
+
+.info strong {
+    display: block;
+    color: var(--gold);
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.info span {
+    font: 13px Arial, sans-serif;
+    color: #eee;
+}
+
+footer {
+    text-align: center;
+    padding: 22px 0 35px;
+    color: #c5b69a;
+    font: 12px Arial, sans-serif;
+}
+
+footer a {
+    color: #f0d58b;
+}
+
+.notice {
+    font-size: 12px;
+    color: #d4c6aa;
+    font-family: Arial, sans-serif;
+}
+
+@media(max-width:600px) {
+    .hero {
+        padding-top: 30px;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav a {
+        font-size: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<main id="inicio">
+    <section class="hero">
+        <img class="logo" src="https://1000logos.net/wp-content/uploads/2018/10/Minecraft-Logo-20091.png" alt="Minecraft">
+
+        <div class="version">JAVA EDITION — ALPHA 1.2.6</div>
+
+        <div class="actions">
+            <button class="mcbtn" onclick="document.querySelector('#servidor').scrollIntoView({behavior:'smooth'})">
+                JOGAR NO SERVIDOR
+            </button>
+
+            <button class="mcbtn" onclick="document.querySelector('#sobre').scrollIntoView({behavior:'smooth'})">
+                SOBRE O SERVIDOR
+            </button>
+        </div>
+    </section>
+
+    <section class="panel" id="servidor">
+        <h1>ENTRE NO MUNDO!</h1>
+
+        <p>
+            Prepare seu Minecraft Alpha 1.2.6 e venha explorar o servidor.
+            Copie o endereço abaixo e adicione-o na lista Multiplayer.
+        </p>
+
+        <div class="field">
+            <input id="serverAddress" type="text" value="alpha.yellowblackstudios.com.br" aria-label="Endereço do servidor">
+
+            <button class="mcbtn" style="width:auto; min-width:125px" onclick="copyAddress()">
+                COPIAR IP
+            </button>
+        </div>
+
+        <p class="notice" id="copyStatus" aria-live="polite">
+            O servidor pode cair por Alguns segundos (é normal, é a Geração)
+        </p>
+    </section>
+
+    <section class="panel">
+        <h2>INFORMAÇÕES</h2>
+
+        <div class="info-grid">
+            <div class="info">
+                <strong>VERSÃO</strong>
+                <span>Alpha 1.2.6</span>
+            </div>
+
+            <div class="info">
+                <strong>EDIÇÃO</strong>
+                <span>Java Edition</span>
+            </div>
+
+            <div class="info">
+                <strong>STATUS</strong>
+                <span>A configurar</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel" id="sobre">
+        <h1>Sobre AlphaSide</h1>
+
+        <p>
+            Um servidor feito para a versão Alpha do Minecraft:
+            paisagens clássicas, construções feitas pelos jogadores
+            e aquela experiência simples dos primeiros dias de Minecraft.
+        </p>
+
+        <p class="notice">
+            Dica: use exatamente a versão Alpha 1.2.6 para entrar.
+            O endereço e as informações de conexão devem ser confirmados pelo administrador.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <div>ALPHA SERVER • NÃO É UM PRODUTO OFICIAL DA MOJANG OU MICROSOFT</div>
+    <div style="margin-top:8px">Feito para fãs do Minecraft clássico.</div>
+</footer>
+
+</div>
+
+<script>
+function copyAddress() {
+    const field = document.getElementById('serverAddress');
+    const status = document.getElementById('copyStatus');
+    const value = field.value.trim();
+
+    if (!value || value === 'alpha.yellowblackstudios.com.br') {
+        status.textContent = 'Não copiou? clique no IP e faça "Ctrl + C"!';
+        field.focus();
+        return;
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(value)
+            .then(() => status.textContent = 'IP copiado! Cole no Multiplayer.')
+            .catch(() => fallbackCopy(field, status));
+    } else {
+        fallbackCopy(field, status);
+    }
+}
+
+function fallbackCopy(field, status) {
+    field.select();
+
+    try {
+        document.execCommand('copy');
+        status.textContent = 'IP copiado! Cole no Multiplayer.';
+    } catch (e) {
+        status.textContent = 'Selecione e copie o endereço manualmente.';
+    }
+}
+</script>
+</body>
+</html>
